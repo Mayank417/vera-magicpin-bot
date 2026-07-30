@@ -244,7 +244,7 @@ def compose_merchant(category: dict[str, Any], merchant: dict[str, Any], trigger
 
     if kind in {"review_theme_emerged"}:
         quote = payload.get("common_quote")
-    q = f'Common line: "{quote}". ' if quote else ""
+        q = f'Common line: "{quote}". ' if quote else ""
         body = (
         f"{first}, review pattern spotted: "
         f"{payload.get('occurrences_30d', 'multiple')} recent reviews mention "
