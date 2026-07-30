@@ -243,9 +243,15 @@ def compose_merchant(category: dict[str, Any], merchant: dict[str, Any], trigger
         return body, "binary_yes_no"
 
     if kind in {"review_theme_emerged"}:
-        quote = payload.get("common_quote")
-        body = f"{first}, review pattern spotted: {payload.get('occurrences_30d', 'multiple')} recent reviews mention {payload.get('theme', 'one repeated theme')}. {('Common line: "' + quote + '". ') if quote else ''}Want me to draft a polite public reply + one operational fix note?"
-        return body, "binary_yes_no"
+    quote = payload.get("common_quote")
+    q = f'Common line: "{quote}". ' if quote else ""
+    body = (
+        f"{first}, review pattern spotted: "
+        f"{payload.get('occurrences_30d', 'multiple')} recent reviews mention "
+        f"{payload.get('theme', 'one repeated theme')}. "
+        f"{q}Want me to draft a polite public reply + one operational fix note?"
+    )
+    return body, "binary_yes_no"
 
     if kind in {"competitor_opened"}:
         body = f"{first}, new competitor signal near {locality}: {payload.get('competitor_name', 'a similar business')} opened {payload.get('distance_km', '?')} km away with {payload.get('their_offer', 'a visible offer')}. Want me to draft a sharper Google post using your own offer{(': ' + active_offer) if active_offer else ''}?"
