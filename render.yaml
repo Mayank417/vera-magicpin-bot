@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: vera-magicpin-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn bot:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: TEAM_NAME
+        value: Shashwat Vera Bot
+      - key: TEAM_MEMBERS
+        value: Shashwat Prajapati
+      - key: CONTACT_EMAIL
+        value: your-email@example.com
+      - key: MODEL_NAME
+        value: deterministic-context-composer-v1
